@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.css";
+import "./App.css";
+import { useState } from "react";
+import Modal from "./comps/modal";
+import Table from "./comps/table";
 
 function App() {
+  let [addEntry, setEntry] = useState(false);
+  let Class = "opac0";
+  let hideModal = () => {
+    Class = "opac1";
+
+    setEntry(!addEntry);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <main>
+      {addEntry && <Modal action={hideModal} className={Class}></Modal>}
+      <div className="buttonDiv">
+        <button
+          onClick={hideModal}
+          type="button"
+          class="btn btn-primary btn-lg"
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          Add New Entry
+        </button>
+      </div>
+      <section>
+        <Table></Table>
+      </section>
+    </main>
   );
 }
 
