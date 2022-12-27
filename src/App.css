@@ -9,12 +9,5 @@ section {
   margin: auto;
   border: 1px solid cyan;
   border-radius: 5px;
-}
-main {
-}
-.opac0 {
-  opacity: 1;
-}
-.opac1 {
-  opacity: 0;
+  overflow: auto;
 }

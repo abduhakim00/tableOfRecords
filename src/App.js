@@ -3,18 +3,20 @@ import "./App.css";
 import { useState } from "react";
 import Modal from "./comps/modal";
 import Table from "./comps/table";
+let data = [];
 
 function App() {
   let [addEntry, setEntry] = useState(false);
-  let Class = "opac0";
   let hideModal = () => {
-    Class = "opac1";
-
     setEntry(!addEntry);
   };
+  let bubbleUp = (d) => {
+    data.push(d);
+  };
+  console.log(data);
   return (
     <main>
-      {addEntry && <Modal action={hideModal} className={Class}></Modal>}
+      {addEntry && <Modal action={hideModal} saveData={bubbleUp}></Modal>}
       <div className="buttonDiv">
         <button
           onClick={hideModal}
@@ -25,7 +27,7 @@ function App() {
         </button>
       </div>
       <section>
-        <Table></Table>
+        <Table data={data}></Table>
       </section>
     </main>
   );
