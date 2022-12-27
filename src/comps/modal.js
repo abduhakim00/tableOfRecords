@@ -8,12 +8,19 @@ function Modal(props) {
     setFields(e.target.value);
   };
 
-  let formSubmit = (e) => {
+  let formSubmit = async (e) => {
     e.preventDefault();
     refsArr.current.forEach((e) => {
       data.push(e.current.value);
     });
     props.saveData(data);
+    fetch("http://localhost:3010/records", {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ record: data }), // body data type must match "Content-Type" header
+    });
     props.action();
   };
 

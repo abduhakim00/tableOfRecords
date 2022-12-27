@@ -1,11 +1,23 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "./comps/modal";
 import Table from "./comps/table";
 let data = [];
 
 function App() {
+  useEffect(() => {
+    setLoading(true);
+    fetch("http://localhost:3010/records")
+      .then((res) => res.json())
+      .then((result) => {
+        data = result.map((e) => {
+          return e.record;
+        });
+        setLoading(false);
+      });
+  }, []);
+  let [loading, setLoading] = useState(false);
   let [addEntry, setEntry] = useState(false);
   let hideModal = () => {
     setEntry(!addEntry);
@@ -27,7 +39,8 @@ function App() {
         </button>
       </div>
       <section>
-        <Table data={data}></Table>
+        {loading && <h1>Loading...</h1>}
+        {!loading && <Table data={data}></Table>}
       </section>
     </main>
   );

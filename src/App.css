@@ -11,3 +11,6 @@ section {
   border-radius: 5px;
   overflow: auto;
 }
+h1{
+  color:cyan;
+}
