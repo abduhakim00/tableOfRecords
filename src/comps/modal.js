@@ -13,8 +13,10 @@ function Modal(props) {
     refsArr.current.forEach((e) => {
       data.push(e.current.value);
     });
-    props.saveData(data);
-    fetch("http://localhost:3010/records", {
+    if (!props.hasNextPage) {
+      props.saveData(data);
+    }
+    fetch("http://localhost:3000/records", {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json",
